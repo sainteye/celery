@@ -33,7 +33,8 @@ class MapRoute(object):
         self.map = {}
         self.patterns = OrderedDict()
         for k, v in map:
-            if isinstance(k, re._pattern_type):
+            # Sean change this
+            if isinstance(k, re.Pattern):
                 self.patterns[k] = v
             elif '*' in k:
                 self.patterns[re.compile(glob_to_re(k))] = v

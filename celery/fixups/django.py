@@ -30,7 +30,8 @@ def _maybe_close_fd(fh):
 
 
 def _verify_django_version(django):
-    if django.VERSION < (1, 8):
+    # Sean update
+    if django.VERSION < (1, 6):
         raise ImproperlyConfigured('Celery 4.x requires Django 1.8 or later.')
 
 
@@ -112,13 +113,16 @@ class DjangoWorkerFixup(object):
         self.DatabaseError = symbol_by_name('django.db:DatabaseError')
 
     def django_setup(self):
-        import django
-        django.setup()
+        # Sean Remove
+        pass
+        # import django
+        # django.setup()
 
     def validate_models(self):
-        from django.core.checks import run_checks
+        # Sean Remove
+        # from django.core.checks import run_checks
         self.django_setup()
-        run_checks()
+        # run_checks()
 
     def install(self):
         signals.beat_embedded_init.connect(self.close_database)
